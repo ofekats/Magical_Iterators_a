@@ -1,81 +1,100 @@
+// MagicalContainer.hpp
+
+#ifndef MAGICALCONTAINER_HPP
+#define MAGICALCONTAINER_HPP
+
 #include <vector>
 
-using namespace std;
+namespace ariel {
 
-namespace ariel
-{
-    class MagicalContainer
-    {
+class MagicalContainer {
+private:
+    std::vector<int> elements;
+
+public:
+    MagicalContainer();
+    ~MagicalContainer();
+    void addElement(int element);
+    void removeElement(int element);
+    int size() const;
+
+    class AscendingIterator {
     private:
-        vector<int> con;
+        const MagicalContainer* container;
+        std::size_t position;
 
     public:
-        MagicalContainer();
-        void addElement(const int num);
-        int size() const;
-        void removeElement(const int elem);
-        class AscendingIterator
-        {
-        public:
-            AscendingIterator() = default;
-            AscendingIterator(MagicalContainer con);
-            AscendingIterator(const AscendingIterator &iter);
-            ~AscendingIterator();
-            AscendingIterator &operator=(const AscendingIterator &iter);
-            bool operator==(const AscendingIterator &iter) const;
-            bool operator!=(const AscendingIterator &iter) const;
-            bool operator>(const AscendingIterator &iter) const;
-            bool operator<(const AscendingIterator &iter) const;
-            int &operator*();
-            AscendingIterator &operator++();
-            AscendingIterator begin();
-            AscendingIterator end();
+        AscendingIterator();
+        explicit AscendingIterator(const MagicalContainer& container);
+        AscendingIterator(const AscendingIterator& other);
+        ~AscendingIterator();
+        AscendingIterator& operator=(const AscendingIterator& other);
+        bool operator==(const AscendingIterator& other) const;
+        bool operator!=(const AscendingIterator& other) const;
+        bool operator>(const AscendingIterator& other) const;
+        bool operator<(const AscendingIterator& other) const;
+        bool operator>=(const AscendingIterator& other) const;
+        bool operator<=(const AscendingIterator& other) const;
+        int operator*() const;
+        AscendingIterator& operator++();
 
-        private:
-            MagicalContainer *conainer;
-            size_t index;
-        };
-        class SideCrossIterator
-        {
-        public:
-            SideCrossIterator() = default;
-            SideCrossIterator(MagicalContainer con);
-            SideCrossIterator(const SideCrossIterator &iter);
-            ~SideCrossIterator();
-            SideCrossIterator &operator=(const SideCrossIterator &iter);
-            bool operator==(const SideCrossIterator &iter) const;
-            bool operator!=(const SideCrossIterator &iter) const;
-            bool operator>(const SideCrossIterator &iter) const;
-            bool operator<(const SideCrossIterator &iter) const;
-            int &operator*();
-            SideCrossIterator &operator++();
-            SideCrossIterator begin();
-            SideCrossIterator end();
-
-        private:
-            MagicalContainer *conainer;
-            size_t index;
-        };
-        class PrimeIterator
-        {
-        public:
-            PrimeIterator() = default;
-            PrimeIterator(MagicalContainer con);
-            PrimeIterator(const PrimeIterator &iter);
-            ~PrimeIterator();
-            PrimeIterator &operator=(const PrimeIterator &iter);
-            bool operator==(const PrimeIterator &iter) const;
-            bool operator!=(const PrimeIterator &iter) const;
-            bool operator>(const PrimeIterator &iter) const;
-            bool operator<(const PrimeIterator &iter) const;
-            int &operator*();
-            PrimeIterator &operator++();
-            PrimeIterator begin();
-            PrimeIterator end();
-
-        private:
-            MagicalContainer *conainer;
-            size_t index;
-        };
+        AscendingIterator begin();
+        AscendingIterator end();
     };
-}
+
+    class SideCrossIterator {
+    private:
+        const MagicalContainer* container;
+        std::size_t position;
+        bool reverse;
+
+    public:
+        SideCrossIterator();
+        explicit SideCrossIterator(const MagicalContainer& container);
+        SideCrossIterator(const SideCrossIterator& other);
+        ~SideCrossIterator();
+        SideCrossIterator& operator=(const SideCrossIterator& other);
+        bool operator==(const SideCrossIterator& other) const;
+        bool operator!=(const SideCrossIterator& other) const;
+        bool operator>(const SideCrossIterator& other) const;
+        bool operator<(const SideCrossIterator& other) const;
+        bool operator>=(const SideCrossIterator& other) const;
+        bool operator<=(const SideCrossIterator& other) const;
+        int operator*() const;
+        SideCrossIterator& operator++();
+
+        SideCrossIterator begin();
+        SideCrossIterator end();
+    };
+
+    class PrimeIterator {
+    private:
+        const MagicalContainer* container;
+        std::size_t position;
+
+        static bool isPrime(int number);
+        static int getNextPrime(int number);
+
+    public:
+        PrimeIterator();
+        explicit PrimeIterator(const MagicalContainer& container);
+        PrimeIterator(const PrimeIterator& other);
+        ~PrimeIterator();
+        PrimeIterator& operator=(const PrimeIterator& other);
+        bool operator==(const PrimeIterator& other) const;
+        bool operator!=(const PrimeIterator& other) const;
+        bool operator>(const PrimeIterator& other) const;
+        bool operator<(const PrimeIterator& other) const;
+        bool operator>=(const PrimeIterator& other) const;
+        bool operator<=(const PrimeIterator& other) const;
+        int operator*() const;
+        PrimeIterator& operator++();
+
+        PrimeIterator begin();
+        PrimeIterator end();
+    };
+};
+
+} // namespace ariel
+
+#endif // MAGICALCONTAINER_HPP
