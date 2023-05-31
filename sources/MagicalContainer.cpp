@@ -76,16 +76,16 @@ int MagicalContainer::AscendingIterator::operator*() const {
     return container->elements[position];
 }
 
-typename MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::operator++() {
+MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::operator++() {
     ++position;
     return *this;
 }
 
-typename MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::begin() {
+MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::begin() {
     return AscendingIterator(*container);
 }
 
-typename MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end() {
+MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end() {
     AscendingIterator iter(*container);
     iter.position = container->elements.size();
     return iter;
