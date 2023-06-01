@@ -162,6 +162,52 @@ TEST_CASE("AscendingIterator - operator<")
     CHECK_NOTHROW(asc_iter3.operator<(asc_iter3));
 }
 
+TEST_CASE("AscendingIterator - operator>=")
+{
+    //create 2 MagicalContainer
+    MagicalContainer container1;
+    MagicalContainer container2;
+    //add elements
+    container1.addElement(-17);
+    container2.addElement(-17);
+    //create 3 AscendingIterator
+    MagicalContainer::AscendingIterator asc_iter1(container1);
+    MagicalContainer::AscendingIterator asc_iter2(container1);
+    MagicalContainer::AscendingIterator asc_iter3(container2);
+    //check if they throw
+    CHECK_NOTHROW(asc_iter1.operator>=(asc_iter2));
+    CHECK(asc_iter1.operator>=(asc_iter2));
+    ++asc_iter1;
+    CHECK(asc_iter1.operator>=(asc_iter2));
+    CHECK(asc_iter2.operator>=(asc_iter1) == false);
+    CHECK_THROWS(asc_iter1.operator>=(asc_iter3));
+    CHECK_THROWS(asc_iter3.operator>=(asc_iter2));
+    CHECK_NOTHROW(asc_iter3.operator>=(asc_iter3));
+}
+
+TEST_CASE("AscendingIterator - operator<=")
+{
+    //create 2 MagicalContainer
+    MagicalContainer container1;
+    MagicalContainer container2;
+    //add elements
+    container1.addElement(-17);
+    container2.addElement(-17);
+    //create 3 AscendingIterator
+    MagicalContainer::AscendingIterator asc_iter1(container1);
+    MagicalContainer::AscendingIterator asc_iter2(container1);
+    MagicalContainer::AscendingIterator asc_iter3(container2);
+    //check if they throw
+    CHECK_NOTHROW(asc_iter1.operator>=(asc_iter2));
+    CHECK(asc_iter1.operator<=(asc_iter2));
+    ++asc_iter2;
+    CHECK(asc_iter1.operator<=(asc_iter2));
+    CHECK(asc_iter2.operator<=(asc_iter1) == false);
+    CHECK_THROWS(asc_iter1.operator<=(asc_iter3));
+    CHECK_THROWS(asc_iter3.operator<=(asc_iter2));
+    CHECK_NOTHROW(asc_iter3.operator<=(asc_iter3));
+}
+
 TEST_CASE("AscendingIterator - Dereference operator (operator*)")
 {
     //create MagicalContainer
@@ -328,6 +374,52 @@ TEST_CASE("SideCrossIterator  - operator<")
     CHECK_THROWS(side_iter1.operator<(side_iter3));
     CHECK_THROWS(side_iter3.operator<(side_iter2));
     CHECK_NOTHROW(side_iter3.operator<(side_iter3));
+}
+
+TEST_CASE("SideCrossIterator - operator>=")
+{
+    //create 2 MagicalContainer
+    MagicalContainer container1;
+    MagicalContainer container2;
+    //add elements
+    container1.addElement(-17);
+    container2.addElement(-17);
+    //create 3 SideCrossIterator
+    MagicalContainer::SideCrossIterator side_iter1(container1);
+    MagicalContainer::SideCrossIterator side_iter2(container1);
+    MagicalContainer::SideCrossIterator side_iter3(container2);
+    //check if they throw
+    CHECK_NOTHROW(side_iter1.operator>=(side_iter2));
+    CHECK(side_iter1.operator>=(side_iter2));
+    ++side_iter1;
+    CHECK(side_iter1.operator>=(side_iter2));
+    CHECK(side_iter2.operator>=(side_iter1) == false);
+    CHECK_THROWS(side_iter1.operator>=(side_iter3));
+    CHECK_THROWS(side_iter3.operator>=(side_iter2));
+    CHECK_NOTHROW(side_iter3.operator>=(side_iter3));
+}
+
+TEST_CASE("SideCrossIterator - operator<=")
+{
+    //create 2 MagicalContainer
+    MagicalContainer container1;
+    MagicalContainer container2;
+    //add elements
+    container1.addElement(-17);
+    container2.addElement(-17);
+    //create 3 SideCrossIterator
+    MagicalContainer::SideCrossIterator side_iter1(container1);
+    MagicalContainer::SideCrossIterator side_iter2(container1);
+    MagicalContainer::SideCrossIterator side_iter3(container2);
+    //check if they throw
+    CHECK_NOTHROW(side_iter1.operator>=(side_iter2));
+    CHECK(side_iter1.operator<=(side_iter2));
+    ++side_iter2;
+    CHECK(side_iter1.operator<=(side_iter2));
+    CHECK(side_iter2.operator<=(side_iter1) == false);
+    CHECK_THROWS(side_iter1.operator<=(side_iter3));
+    CHECK_THROWS(side_iter3.operator<=(side_iter2));
+    CHECK_NOTHROW(side_iter3.operator<=(side_iter3));
 }
 
 TEST_CASE("SideCrossIterator  - Dereference operator (operator*)")
@@ -501,6 +593,52 @@ TEST_CASE("PrimeIterator  - operator<")
     CHECK_THROWS(pri_iter1.operator<(pri_iter3));
     CHECK_THROWS(pri_iter3.operator<(pri_iter2));
     CHECK_NOTHROW(pri_iter3.operator<(pri_iter3));
+}
+
+TEST_CASE("PrimeIterator - operator>=")
+{
+    //create 2 MagicalContainer
+    MagicalContainer container1;
+    MagicalContainer container2;
+    //add elements
+    container1.addElement(-17);
+    container2.addElement(-17);
+    //create 3 PrimeIterator
+    MagicalContainer::PrimeIterator pri_iter1(container1);
+    MagicalContainer::PrimeIterator pri_iter2(container1);
+    MagicalContainer::PrimeIterator pri_iter3(container2);
+    //check if they throw
+    CHECK_NOTHROW(pri_iter1.operator>=(pri_iter2));
+    CHECK(pri_iter1.operator>=(pri_iter2));
+    ++pri_iter1;
+    CHECK(pri_iter1.operator>=(pri_iter2));
+    CHECK(pri_iter2.operator>=(pri_iter1) == false);
+    CHECK_THROWS(pri_iter1.operator>=(pri_iter3));
+    CHECK_THROWS(pri_iter3.operator>=(pri_iter2));
+    CHECK_NOTHROW(pri_iter3.operator>=(pri_iter3));
+}
+
+TEST_CASE("PrimeIterator - operator<=")
+{
+    //create 2 MagicalContainer
+    MagicalContainer container1;
+    MagicalContainer container2;
+    //add elements
+    container1.addElement(-17);
+    container2.addElement(-17);
+    //create 3 PrimeIterator
+    MagicalContainer::PrimeIterator pri_iter1(container1);
+    MagicalContainer::PrimeIterator pri_iter2(container1);
+    MagicalContainer::PrimeIterator pri_iter3(container2);
+    //check if they throw
+    CHECK_NOTHROW(pri_iter1.operator>=(pri_iter2));
+    CHECK(pri_iter1.operator<=(pri_iter2));
+    ++pri_iter2;
+    CHECK(pri_iter1.operator<=(pri_iter2));
+    CHECK(pri_iter2.operator<=(pri_iter1) == false);
+    CHECK_THROWS(pri_iter1.operator<=(pri_iter3));
+    CHECK_THROWS(pri_iter3.operator<=(pri_iter2));
+    CHECK_NOTHROW(pri_iter3.operator<=(pri_iter3));
 }
 
 TEST_CASE("PrimeIterator  - Dereference operator (operator*)")

@@ -1,10 +1,6 @@
-// MagicalContainer.cpp
-
 #include "MagicalContainer.hpp"
 
-namespace ariel {
-
-// Implementation of MagicalContainer methods
+using namespace ariel;
 
 MagicalContainer::MagicalContainer() {}
 
@@ -26,8 +22,6 @@ void MagicalContainer::removeElement(int element) {
 int MagicalContainer::size() const {
     return elements.size();
 }
-
-// Implementation of AscendingIterator methods
 
 MagicalContainer::AscendingIterator::AscendingIterator()
     : container(nullptr), position(0) {}
@@ -223,5 +217,3 @@ typename MagicalContainer::PrimeIterator MagicalContainer::PrimeIterator::end() 
     iter.position = container->elements.size();
     return iter;
 }
-
-} // namespace ariel

@@ -1,7 +1,4 @@
-// MagicalContainer.hpp
-
-#ifndef MAGICALCONTAINER_HPP
-#define MAGICALCONTAINER_HPP
+#pragma once
 
 #include <vector>
 
@@ -25,7 +22,7 @@ public:
 
     public:
         AscendingIterator();
-        explicit AscendingIterator(const MagicalContainer& container);
+        AscendingIterator(const MagicalContainer& container);
         AscendingIterator(const AscendingIterator& other);
         ~AscendingIterator();
         AscendingIterator& operator=(const AscendingIterator& other);
@@ -50,7 +47,7 @@ public:
 
     public:
         SideCrossIterator();
-        explicit SideCrossIterator(const MagicalContainer& container);
+        SideCrossIterator(const MagicalContainer& container);
         SideCrossIterator(const SideCrossIterator& other);
         ~SideCrossIterator();
         SideCrossIterator& operator=(const SideCrossIterator& other);
@@ -77,7 +74,7 @@ public:
 
     public:
         PrimeIterator();
-        explicit PrimeIterator(const MagicalContainer& container);
+        PrimeIterator(const MagicalContainer& container);
         PrimeIterator(const PrimeIterator& other);
         ~PrimeIterator();
         PrimeIterator& operator=(const PrimeIterator& other);
@@ -95,6 +92,4 @@ public:
     };
 };
 
-} // namespace ariel
-
-#endif // MAGICALCONTAINER_HPP
+}
