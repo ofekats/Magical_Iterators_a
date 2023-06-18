@@ -25,9 +25,9 @@ TEST_CASE("MagicalContainer - removeElement")
     //remove elements
     CHECK_NOTHROW(container.removeElement(-17));
     CHECK_NOTHROW(container.removeElement(0));
-    //remove element that doesnt exist- should do nothing
-    CHECK_NOTHROW(container.removeElement(-17));
-    CHECK_NOTHROW(container.removeElement(7));
+    //remove element that doesnt exist- should throw
+    CHECK_THROWS(container.removeElement(-17));
+    CHECK_THROWS(container.removeElement(7));
 }
 
 TEST_CASE("MagicalContainer - size")
@@ -112,10 +112,10 @@ TEST_CASE("AscendingIterator - Inequality comparison (operator!=)")
     MagicalContainer::AscendingIterator asc_iter2(asc_iter1);
     MagicalContainer::AscendingIterator asc_iter3(container2);
     //check if they not equal
-    CHECK(asc_iter1.operator==(asc_iter2) ==false);
+    CHECK(asc_iter1.operator==(asc_iter2));
     CHECK_THROWS(asc_iter1.operator==(asc_iter3));
     ++asc_iter1;
-    CHECK(asc_iter1.operator==(asc_iter2));
+    CHECK(asc_iter1.operator==(asc_iter2) ==false);
 }
 
 TEST_CASE("AscendingIterator - operator>")
@@ -234,6 +234,7 @@ TEST_CASE("AscendingIterator - Pre-increment operator (operator++)")
     MagicalContainer::AscendingIterator asc_iter1(container);
     //check if they throw
     CHECK_NOTHROW(++asc_iter1);
+    ++asc_iter1;
     CHECK_THROWS(++asc_iter1);
 }
 
@@ -262,7 +263,6 @@ TEST_CASE("AscendingIterator - end")
     MagicalContainer::AscendingIterator asc_iter1(container);
     //check if they throw
     CHECK_NOTHROW(asc_iter1.end());
-    CHECK(*asc_iter1.end() == 17);
 }
 
 //SideCrossIterator
@@ -326,10 +326,11 @@ TEST_CASE("SideCrossIterator  - Inequality comparison (operator!=)")
     MagicalContainer::SideCrossIterator side_iter2(side_iter1);
     MagicalContainer::SideCrossIterator side_iter3(container2);
     //check if they not equal
-    CHECK(side_iter1.operator==(side_iter2) == false);
+    CHECK(side_iter1.operator==(side_iter2));
+    //not the same container
     CHECK_THROWS(side_iter1.operator==(side_iter3));
     ++side_iter1;
-    CHECK(side_iter1.operator==(side_iter2));
+    CHECK(side_iter1.operator==(side_iter2) == false);
 }
 
 TEST_CASE("SideCrossIterator  - operator>")
@@ -339,6 +340,7 @@ TEST_CASE("SideCrossIterator  - operator>")
     MagicalContainer container2;
     //add elements
     container1.addElement(-17);
+    container1.addElement(1);
     container2.addElement(-17);
     //create 3 SideCrossIterator 
     MagicalContainer::SideCrossIterator side_iter1(container1);
@@ -361,6 +363,7 @@ TEST_CASE("SideCrossIterator  - operator<")
     MagicalContainer container2;
     //add elements
     container1.addElement(-17);
+    container1.addElement(1);
     container2.addElement(-17);
     //create 3 SideCrossIterator 
     MagicalContainer::SideCrossIterator side_iter1(container1);
@@ -383,6 +386,7 @@ TEST_CASE("SideCrossIterator - operator>=")
     MagicalContainer container2;
     //add elements
     container1.addElement(-17);
+    container1.addElement(1);
     container2.addElement(-17);
     //create 3 SideCrossIterator
     MagicalContainer::SideCrossIterator side_iter1(container1);
@@ -406,13 +410,14 @@ TEST_CASE("SideCrossIterator - operator<=")
     MagicalContainer container2;
     //add elements
     container1.addElement(-17);
+    container1.addElement(1);
     container2.addElement(-17);
     //create 3 SideCrossIterator
     MagicalContainer::SideCrossIterator side_iter1(container1);
     MagicalContainer::SideCrossIterator side_iter2(container1);
     MagicalContainer::SideCrossIterator side_iter3(container2);
     //check if they throw
-    CHECK_NOTHROW(side_iter1.operator>=(side_iter2));
+    CHECK_NOTHROW(side_iter1.operator<=(side_iter2));
     CHECK(side_iter1.operator<=(side_iter2));
     ++side_iter2;
     CHECK(side_iter1.operator<=(side_iter2));
@@ -451,6 +456,7 @@ TEST_CASE("SideCrossIterator  - Pre-increment operator (operator++)")
     MagicalContainer::SideCrossIterator  side_iter1(container);
     //check if they throw
     CHECK_NOTHROW(++side_iter1);
+    ++side_iter1;
     CHECK_THROWS(++side_iter1);
 }
 
@@ -465,7 +471,7 @@ TEST_CASE("SideCrossIterator  - begin")
     MagicalContainer::SideCrossIterator  side_iter1(container);
     //check if they throw
     CHECK_NOTHROW(side_iter1.begin());
-    CHECK(*side_iter1.begin() == 17);
+    CHECK(*side_iter1.begin() == -17);
 }
 
 TEST_CASE("SideCrossIterator  - end")
@@ -479,7 +485,6 @@ TEST_CASE("SideCrossIterator  - end")
     MagicalContainer::SideCrossIterator  side_iter1(container);
     //check if they throw
     CHECK_NOTHROW(side_iter1.end());
-    CHECK(*side_iter1.end() == -17);
 }
 
 
@@ -518,7 +523,7 @@ TEST_CASE("PrimeIterator  - Equality comparison (operator==)")
     MagicalContainer container1;
     MagicalContainer container2;
     //add elements
-    container1.addElement(-17);
+    container1.addElement(17);
     container2.addElement(5);
     //create 3 PrimeIterator 
     MagicalContainer::PrimeIterator pri_iter1(container1);
@@ -538,17 +543,18 @@ TEST_CASE("PrimeIterator  - Inequality comparison (operator!=)")
     MagicalContainer container1;
     MagicalContainer container2;
     //add elements
-    container1.addElement(-17);
+    container1.addElement(17);
     container2.addElement(5);
     //create 3 PrimeIterator 
     MagicalContainer::PrimeIterator pri_iter1(container1);
     MagicalContainer::PrimeIterator pri_iter2(pri_iter1);
     MagicalContainer::PrimeIterator pri_iter3(container2);
     //check if they not equal
-    CHECK(pri_iter1.operator==(pri_iter2) == false);
+    CHECK(pri_iter1.operator==(pri_iter2));
+    //not the same container
     CHECK_THROWS(pri_iter1.operator==(pri_iter3));
     ++pri_iter1;
-    CHECK(pri_iter1.operator==(pri_iter2));
+    CHECK(pri_iter1.operator==(pri_iter2) == false);
 }
 
 TEST_CASE("PrimeIterator  - operator>")
@@ -557,7 +563,7 @@ TEST_CASE("PrimeIterator  - operator>")
     MagicalContainer container1;
     MagicalContainer container2;
     //add elements
-    container1.addElement(-17);
+    container1.addElement(17);
     container2.addElement(-17);
     //create 3 PrimeIterator 
     MagicalContainer::PrimeIterator pri_iter1(container1);
@@ -579,7 +585,7 @@ TEST_CASE("PrimeIterator  - operator<")
     MagicalContainer container1;
     MagicalContainer container2;
     //add elements
-    container1.addElement(-17);
+    container1.addElement(17);
     container2.addElement(-17);
     //create 3 PrimeIterator 
     MagicalContainer::PrimeIterator pri_iter1(container1);
@@ -601,7 +607,7 @@ TEST_CASE("PrimeIterator - operator>=")
     MagicalContainer container1;
     MagicalContainer container2;
     //add elements
-    container1.addElement(-17);
+    container1.addElement(17);
     container2.addElement(-17);
     //create 3 PrimeIterator
     MagicalContainer::PrimeIterator pri_iter1(container1);
@@ -624,8 +630,8 @@ TEST_CASE("PrimeIterator - operator<=")
     MagicalContainer container1;
     MagicalContainer container2;
     //add elements
-    container1.addElement(-17);
-    container2.addElement(-17);
+    container1.addElement(17);
+    container2.addElement(-1);
     //create 3 PrimeIterator
     MagicalContainer::PrimeIterator pri_iter1(container1);
     MagicalContainer::PrimeIterator pri_iter2(container1);
@@ -646,15 +652,16 @@ TEST_CASE("PrimeIterator  - Dereference operator (operator*)")
     //create MagicalContainer
     MagicalContainer container;
     //add elements
-    container.addElement(-17);
+    container.addElement(11);
     container.addElement(4);
     container.addElement(17);
     //create PrimeIterator 
     MagicalContainer::PrimeIterator pri_iter1(container);
     //check if they throw
-    CHECK(*pri_iter1 == -17);
+    CHECK(*pri_iter1 == 11);
     ++pri_iter1;
     CHECK(*pri_iter1 == 17);
+    ++pri_iter1;
     //doesnt have more element because 4 not prime
     CHECK_THROWS(++pri_iter1);
 }
@@ -696,13 +703,10 @@ TEST_CASE("PrimeIterator  - end")
     MagicalContainer container;
     //add elements
     container.addElement(17);
-    container.addElement(-17);
+    container.addElement(11);
     container.addElement(6);
     //create PrimeIterator 
     MagicalContainer::PrimeIterator pri_iter1(container);
     //check if they throw
     CHECK_NOTHROW(pri_iter1.end());
-    //6 is not prime
-    CHECK(*pri_iter1.end() != 6);
-    CHECK(*pri_iter1.end() == -17);
 }
